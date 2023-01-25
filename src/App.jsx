@@ -1,23 +1,23 @@
-import { useState, useEffect } from 'react'
-import './App.css'
+import { useEffect } from 'react';
 
-
-
+const API_URL = 'https://www.omdbapi.com?apikey=b53e79ff'
 
 const App = () => {
-  const [counter, setCounter] = useState(0);
-  useEffect(() => {
-    setCounter(79);
-  },[])
 
+  const searchMovies = async (title) => {
+    const response = await fetch(`${API_URL}&s=${title}`);
+    const data = await response.json();
+    
+    console.log(data.Search);
+  }
+
+  useEffect(() =>{
+    searchMovies('blacklist')
+  },[]);
+  
   return (
-    <div className="App">
-      <button onClick={ () => setCounter((prevCount) => prevCount -1)} >-</button>
-      <h1>{counter}</h1>
-      <button onClick={ () => setCounter((prevCount) => prevCount +1)} >+</button>
-
-    </div>
-  )
+    <h1>App</h1>
+  );
 }
 
 export default App
